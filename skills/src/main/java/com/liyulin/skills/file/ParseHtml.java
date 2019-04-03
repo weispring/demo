@@ -41,7 +41,7 @@ public class ParseHtml {
 	}
 
 	public static void main(String[] args) {
-		for (String s : getURLCollection("http://user.qzone.qq.com/1634753825/infocenter")) {
+		for (String s : getURLCollection("https://i.qq.com/?s_url=http%3A%2F%2Fuser.qzone.qq.com%2F1634753825%2Finfocenter&rd=1")) {
 			System.out.println(s);
 		}
 	}

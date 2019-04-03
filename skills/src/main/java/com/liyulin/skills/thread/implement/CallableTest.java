@@ -1,10 +1,13 @@
 package com.liyulin.skills.thread.implement;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class CallableTest {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
@@ -19,7 +22,8 @@ public class CallableTest {
 			}
 		});
 		futureTask.run();
-		System.out.println("result=" + futureTask.get());
+		log.info("xx====");
+		log.info("result=" + futureTask.get());
 	}
 
 }

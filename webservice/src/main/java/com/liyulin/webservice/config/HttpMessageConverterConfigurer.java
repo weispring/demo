@@ -19,7 +19,7 @@ public class HttpMessageConverterConfigurer implements WebMvcConfigurer {
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(buildJsonHttpMessageConverter());
-		converters.add(buildXmlHttpMessageConverter());
+		//converters.add(buildXmlHttpMessageConverter());
 	}
 
 	private FastJsonHttpMessageConverter buildJsonHttpMessageConverter() {

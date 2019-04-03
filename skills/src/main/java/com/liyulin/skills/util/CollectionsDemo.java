@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Collections常用方法
  *
+ * 冒泡排序
  * @author liyulin
  * @date 2018年10月7日下午10:48:08
  */
