@@ -1,5 +1,7 @@
 package com.liyulin.skills.net.tcp;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +16,7 @@ import java.net.Socket;
  * @author liyulin
  * @date 2013/03/08
  */
+@Slf4j
 public class TCPServer {
 
 	public void startServer() {
@@ -27,6 +30,7 @@ public class TCPServer {
 			 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));) {
 
 			String str = bufferedReader.readLine();
+			log.info("接受：{}",str);
 			printWriter.println("服务端已接收到信息：" + str);
 			printWriter.flush();
 		} catch (IOException e) {

@@ -26,6 +26,7 @@ public class UDPClient {
 
 				String psx = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
 				log.info(psx);
+				log.info(psx.length()+"");
 				if ((psx == null) || (psx.equals("end"))) {
 					break;
 				}

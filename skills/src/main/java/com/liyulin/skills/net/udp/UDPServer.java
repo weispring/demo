@@ -24,7 +24,9 @@ public class UDPServer {
 			log.info("服务端正在等待输入数据....");
 			InetAddress address = InetAddress.getByName("localhost");
 			while (true) {
+				log.info("阻塞：");
 				String str = reader.readLine();
+				log.info("阻塞1：");
 				byte[] buffer = str.getBytes();
 				dsocket.send(new DatagramPacket(buffer, buffer.length, address, 5000));
 				if ((str == null) || (str.equals("end"))) {

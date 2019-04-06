@@ -10,7 +10,7 @@ public class Test extends ForkJoinPool {
 	public static void main(String[] args) {
 		Long start = System.currentTimeMillis();
 		// 初始化数据
-		int size = 1000;
+		int size = 8;
 		int[] data = new int[size];
 		for (int i = 0; i < size; i++) {
 			data[i] = i + 1;
