@@ -14,7 +14,7 @@ public class SemaphoreTest {
 	public static void main(String[] args) {
 		int parties = 10;
 		final Semaphore semaphore = new Semaphore(parties);
-		for (int i = 0; i < parties; i++) {
+		for (int i = 0; i < 1000; i++) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
