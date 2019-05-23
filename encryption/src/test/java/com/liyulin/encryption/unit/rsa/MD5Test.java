@@ -25,4 +25,18 @@ public class MD5Test {
 		log.info("解密的：{}", content);
 	}
 
+	@Test
+	public void testMd() throws NoSuchAlgorithmException {
+		String text = new String("luckyQing 0909；；立春");
+		log.info("原始：{}", text);
+		log.info("MD5后：{}", MD5Util.string2MD5(text));
+		log.info("加密的：{}", MD5Util.convertMD5(text));
+
+		String content = MD5Util.convertMD5(MD5Util.convertMD5(text));
+
+		Assertions.assertThat(content).isEqualTo(text);
+		log.info("解密的：{}", content);
+	}
+
+
 }
