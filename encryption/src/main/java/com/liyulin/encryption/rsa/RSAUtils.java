@@ -1,6 +1,9 @@
 package com.liyulin.encryption.rsa;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.Charset;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -32,6 +35,7 @@ import javax.crypto.Cipher;
  * @date 2012-4-26
  * @version 1.0
  */
+@Slf4j
 public final class RSAUtils {
 
 	/**
@@ -57,12 +61,12 @@ public final class RSAUtils {
 	/**
 	 * RSA最大加密明文大小
 	 */
-	private static final int MAX_ENCRYPT_BLOCK = 117;
+	private static final int MAX_ENCRYPT_BLOCK = 117+1;
 
 	/**
 	 * RSA最大解密密文大小
 	 */
-	private static final int MAX_DECRYPT_BLOCK = 128;
+	private static final int MAX_DECRYPT_BLOCK = 128+1;
 
 	/**
 	 * <p>
@@ -74,7 +78,7 @@ public final class RSAUtils {
 	 */
 	public static Map<String, Object> genKeyPair() throws Exception {
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
-		keyPairGen.initialize(1024);
+		keyPairGen.initialize(1032);
 		KeyPair keyPair = keyPairGen.generateKeyPair();
 		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
 		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
@@ -292,4 +296,28 @@ public final class RSAUtils {
 		return Base64.encode(key.getEncoded());
 	}
 
+	public static void main(String[] args) throws Exception{
+
+		/*byte[] bb = new byte[]{48, -127, -97, 48, 13, 6, 9, 42, -122, 72, -122, -9, 13, 1, 1, 1, 5, 0, 3, -127, -115, 0, 48, -127, -119, 2, -127, -127, 0, -106, 10, -22, -1, 17, -49, -22, 35, 28, 114, 81, -48, 68, 105, -121, -111, -4, 112, 122, -24, 68, 12, 24, 92, -38, 59, -70, 12, 46, -36, 88, 113, 10, 49, -36, -54, -120, 86, -16, -124, 85, 115, 82, -113, 70, -70, -27, -122, 45, -94, 5, -7, -76, 63, -38, -72, 102, 0, -65, 53, 2, -17, -50, 38, -60, 78, -17, 58, -42, -36, 48, -68, 66, 81, 29, 13, -52, -32, 85, -9, -102, 63, -55, -29, -56, -125, -99, -99, 37, 37, -116, 11, -44, 87, 54, 55, -56, -79, 48, 61, 75, -82, -76, 33, -127, 92, 49, -103, -96, 69, 65, -68, 58, 92, 13, -120, -29, -120, -43, -22, 52, 121, -81, 66, 77, -5, -108, 29, 2, 3, 1, 0, 1};
+
+
+		String s = Base64.encode(bb);
+		log.info("s:{}",s);*/
+
+		Map<String, Object> map = genKeyPair();
+		RSAPublicKey publicKey = (RSAPublicKey) map.get(PUBLIC_KEY);;
+		RSAPrivateKey privateKey = (RSAPrivateKey) map.get(PRIVATE_KEY);
+		//CharName
+		byte[] bytes = publicKey.getEncoded();
+		String pk = new String(bytes);
+		byte[] b = pk.getBytes();
+		log.info("bytes:{},b:{}",bytes,b);
+		String priKey = new String(privateKey.getEncoded());
+		String content = "1234567890123";
+		byte[] p = encryptByPublicKey(content.getBytes(),Base64.encode(publicKey.getEncoded()));
+		String pp = Base64.encode(privateKey.getEncoded());
+		log.info("pp:{}",pp.getBytes());
+		byte[] m = decryptByPrivateKey(p,pp);
+		System.out.print(new String(m));
+	}
 }
