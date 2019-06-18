@@ -1,7 +1,11 @@
 package com.liyulin.encryption.md5;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
+import java.util.Base64;
 
 /**
  * 采用MD5加密解密，MD5加密算法是一种单向加密算法。
@@ -48,4 +52,24 @@ public final class MD5Util {
 		return new String(a);
 	}
 
+
+	/**
+	 * 非jdk提供的算法，需要自己添加进去
+	 * @param inStr
+	 * @return
+	 */
+
+	public static void bcMd5(String inStr) throws Exception{
+		Security.addProvider(new BouncyCastleProvider());
+		MessageDigest md4 = MessageDigest.getInstance("MD4");
+		String digest = Base64.getEncoder().encodeToString(md4.digest("dajandoajdjdnao".getBytes()));
+		System.out.print(digest);
+	}
+
+
+
+
+	public static void main(String[] args) throws Exception {
+		bcMd5("");
+	}
 }
