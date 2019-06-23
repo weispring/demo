@@ -2,11 +2,13 @@ package com.liyulin.webservice.service.impl;
 
 import javax.jws.WebService;
 
+import org.apache.cxf.interceptor.InInterceptors;
 import org.springframework.stereotype.Service;
 
 import com.liyulin.webservice.response.UserRespBody;
 import com.liyulin.webservice.service.IUserService;
 
+@InInterceptors(interceptors={"com.liyulin.webservice.config.ReqInterceptor","com.liyulin.webservice.config.AuthInterceptor"})
 @WebService(
 		// 对外发布的服务名
 		serviceName = "UserService",
