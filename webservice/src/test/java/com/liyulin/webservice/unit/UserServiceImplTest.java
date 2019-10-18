@@ -1,5 +1,6 @@
 package com.liyulin.webservice.unit;
 
+import com.liyulin.webservice.response.UserRespBody;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
@@ -9,6 +10,9 @@ import com.alibaba.fastjson.JSON;
 import com.liyulin.webservice.service.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
+
+import javax.xml.ws.BindingProvider;
+import java.util.Map;
 
 @Slf4j
 public class UserServiceImplTest {
@@ -27,10 +31,16 @@ public class UserServiceImplTest {
             jaxWsProxyFactoryBean.setServiceClass(IUserService.class);
             // 创建一个代理接口实现
             IUserService userService = (IUserService) jaxWsProxyFactoryBean.create();
+
+			BindingProvider bp = (BindingProvider)userService;
+			Map<String, Object> context = bp.getRequestContext();
+			context.put(BindingProvider.USERNAME_PROPERTY, "root");
+			context.put(BindingProvider.PASSWORD_PROPERTY, "admin");
+
             // 数据准备
             String userId = "maple";
             // 调用代理接口的方法调用并返回结果
-            String result = userService.getUserName(userId);
+			UserRespBody result = userService.getUser(userId);
 			log.info("返回结果：{}", result);
         } catch (Exception e) {
 			log.error(e.getMessage(), e);
