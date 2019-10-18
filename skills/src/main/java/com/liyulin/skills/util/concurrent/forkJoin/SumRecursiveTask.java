@@ -3,6 +3,7 @@ package com.liyulin.skills.util.concurrent.forkJoin;
 import java.util.concurrent.RecursiveTask;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * fork/join 求和
@@ -38,6 +39,7 @@ import lombok.AllArgsConstructor;
  * @date 2018年10月14日下午10:07:13
  */
 @AllArgsConstructor
+@Slf4j
 public class SumRecursiveTask extends RecursiveTask<Integer> {
 
 	private static final long serialVersionUID = 1L;
@@ -50,6 +52,7 @@ public class SumRecursiveTask extends RecursiveTask<Integer> {
 
 	@Override
 	protected Integer compute() {
+		log.info("线程id:{}",Thread.currentThread().getId());
 		if (endIndex - startIndex > THRESHOLD) {
 			int middle = (endIndex + startIndex) / 2;
 			SumRecursiveTask taskHead = new SumRecursiveTask(data, startIndex, middle);
